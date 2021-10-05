@@ -35,7 +35,7 @@ const Home: NextPage = () => {
                 Welcome to <a href="https://nextjs.org">Next.js!</a>
                 <button onClick={(e) => {
                   e.preventDefault()
-                  getSomething()
+                  getSomething(authData!.access_token)
                 }}>get something</button>
               </>
           }

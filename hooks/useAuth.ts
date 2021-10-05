@@ -6,7 +6,7 @@ const options = {
 };
 
 const useAuth = () => {
-    const [authData, setAuthData] = useState(null);
+    const [authData, setAuthData] = useState<null | { access_token: string}>(null);
     const [isLogged, setIsLogged] = useState(false);
     const [isLogging, setIsLogging] = useState(false);
 
@@ -24,7 +24,6 @@ const useAuth = () => {
             }
         })();
     }, []);
-    console.log(authData);
 
     return {
         authData,
