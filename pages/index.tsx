@@ -19,6 +19,7 @@ const Home: NextPage = () => {
       queryClient.setQueryData('test', data);
     }
   })
+  console.log('authData: ', authData)
   return (
     <div className={styles.container}>
       <Head>
@@ -35,7 +36,7 @@ const Home: NextPage = () => {
                 Welcome to <a href="https://nextjs.org">Next.js!</a>
                 <button onClick={(e) => {
                   e.preventDefault()
-                  getSomething(authData!.access_token)
+                  getSomething(authData!.code)
                 }}>get something</button>
               </>
           }

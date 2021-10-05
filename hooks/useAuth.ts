@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import AccountsSDK from '@livechat/accounts-sdk';
 
 const options = {
-    client_id: process.env.NEXT_PUBLIC_LIVECHAT_APP_CLIENT_ID
+    client_id: process.env.NEXT_PUBLIC_LIVECHAT_APP_CLIENT_ID,
+    response_type: 'code'
 };
 
 const useAuth = () => {
-    const [authData, setAuthData] = useState<null | { access_token: string}>(null);
+    const [authData, setAuthData] = useState<null | { code: string}>(null);
     const [isLogged, setIsLogged] = useState(false);
     const [isLogging, setIsLogging] = useState(false);
 

@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const baseApiPathname = '/api/';
 
-const getSomething = async (access_token: string) => {
-  const { data } = await axios.get<{ message: string }>(`${baseApiPathname}hello?code=${access_token}`);
+const getSomething = async (code: string) => {
+  const { data } = await axios.get<{ message: string }>(`${baseApiPathname}hello?code=${code}`);
   return data;
 }
 
