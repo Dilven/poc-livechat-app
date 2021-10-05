@@ -11,9 +11,11 @@
   "dependencies": {
     "@hapi/boom": "^9.1.4",
     "@livechat/accounts-sdk": "^2.0.3",
+    "axios": "^0.22.0",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-query": "^3.25.1"
   },
   "devDependencies": {
     "@types/react": "17.0.27",
