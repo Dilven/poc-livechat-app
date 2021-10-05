@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { AccountsSDK } from '@livechat/accounts-sdk';
+import AccountsSDK from '@livechat/accounts-sdk';
 
 const instance = new AccountsSDK({
   client_id: 'be4050fbda6ee6a63636bfa0ea4554cd',
