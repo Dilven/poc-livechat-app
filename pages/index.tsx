@@ -2,8 +2,27 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { AccountsSDK } from '@livechat/accounts-sdk';
+
+const instance = new AccountsSDK({
+  client_id: 'be4050fbda6ee6a63636bfa0ea4554cd',
+  redirect_uri: 'https://poc-livechat-app.vercel.app/'
+});
 
 const Home: NextPage = () => {
+  const auth = async (e: any) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    const authorizeData = await instance.popup().authorize()
+    const transaction = authorizeData.verify(authorizeData);
+    console.log('transaction: ', transaction)
+    if (transaction != null) {
+      // authorization success
+      // authorizeData contains `accessToken` or `code`
+      // transation contains state and optional code_verifier (code + PKCE)
+    }
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -13,6 +32,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
+        <button onClick={auth}>test</button>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
