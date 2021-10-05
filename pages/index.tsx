@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       e.preventDefault();
     }
     const authorizeData = await instance.popup().authorize()
-    const transaction = authorizeData.verify(authorizeData);
+    const transaction = instance.verify(authorizeData);
     console.log('transaction: ', transaction)
     if (transaction != null) {
       // authorization success
