@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import AccountsSDK from '@livechat/accounts-sdk';
 
 const options = {
-    client_id: process.env.LIVECHAT_APP_CLIENT_ID
+    client_id: process.env.NEXT_PUBLIC_LIVECHAT_APP_CLIENT_ID
 };
 
 const useAuth = () => {
