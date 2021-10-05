@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hapi/boom": "^9.1.4",
     "@livechat/accounts-sdk": "^2.0.3",
     "next": "11.1.2",
     "react": "17.0.2",
