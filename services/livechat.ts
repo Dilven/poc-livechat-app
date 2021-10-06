@@ -18,8 +18,8 @@ const authorize = async (code: string) => {
 }
 
 const getChats = async (token: string) => {
-	const { data: chats } = await axios.post<any, any>('https://api.livechatinc.com/v3.2/agent/list_chats', {},  {
-		headers: { Authorization: `Bearer ${token}` }
+	const { data: chats } = await axios.post<any, any>('https://api.livechatinc.com/v3.3/agent/action/list_chats', {}, {
+		headers: { Authorization: token }
 	})
 	return chats;
 }

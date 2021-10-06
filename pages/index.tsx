@@ -3,13 +3,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useMutation, useQueryClient } from 'react-query'
 import useAuth from '../hooks/useAuth'
+import { useChatList } from '../hooks/useChatList'
 import { Api } from '../services/api'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const {
     authData,
-    isLoading,
     singIn
   } = useAuth()
   const queryClient = useQueryClient();
@@ -19,6 +19,11 @@ const Home: NextPage = () => {
       queryClient.setQueryData('test', data);
     }
   })
+  const { chatList } = useChatList(authData, (data: any) => {
+    console.log("🚀 ~ file: index.tsx ~ line 23 ~ const{}=useChatList ~ data", data)
+  })
+
+  console.log("🚀 ~ file: index.tsx ~ line 25 ~ const{chatList}=useChatList ~ chatList", chatList)
   console.log('authData: ', authData)
   return (
     <div className={styles.container}>
@@ -30,17 +35,10 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         {!authData && <button onClick={singIn}>Sign in</button>}
         <h1 className={styles.title}>
-          {
-            isLoading 
-            ? <p>Loading...</p>
-            : <>
-                Welcome to <a href="https://nextjs.org">Next.js!</a>
-                <button onClick={(e) => {
-                  e.preventDefault()
-                  getSomething(authData!.code)
-                }}>get something</button>
-              </>
-          }
+        <button onClick={(e) => {
+          e.preventDefault()
+          getSomething()
+        }}>Get chats</button>
         </h1>
       </main>
 
