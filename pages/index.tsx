@@ -9,8 +9,8 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   const {
     authData,
-    isLogged,
-    isLogging,
+    isLoading,
+    singIn
   } = useAuth()
   const queryClient = useQueryClient();
   const { mutate: getSomething } = useMutation(Api.getSomething, {
@@ -28,9 +28,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        {!authData && <button onClick={singIn}>Sign in</button>}
         <h1 className={styles.title}>
           {
-            isLogging 
+            isLoading 
             ? <p>Loading...</p>
             : <>
                 Welcome to <a href="https://nextjs.org">Next.js!</a>
