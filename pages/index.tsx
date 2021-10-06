@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useMutation, useQueryClient } from 'react-query'
 import useAuth from '../hooks/useAuth'
 import { useChatList } from '../hooks/useChatList'
+import { Chat } from '../models/livechat'
 import { Api } from '../services/api'
 import styles from '../styles/Home.module.css'
 
@@ -19,8 +20,19 @@ const Home: NextPage = () => {
       queryClient.setQueryData('test', data);
     }
   })
-  const { chatList } = useChatList(authData, (data: any) => {
+
+  const { mutate: getSentiment } = useMutation(Api.getSentiment, {
+    onSuccess: (data) => {
+      console.log('test: ', data)
+      queryClient.setQueryData('test1', data);
+    }
+  })
+  const { chatList } = useChatList(authData, (data: Chat | null) => {
     console.log("🚀 ~ file: index.tsx ~ line 23 ~ const{}=useChatList ~ data", data)
+    const messages = data?.thread.events.filter(({ event }) => event === 'message')
+    const text = messages?.join(' ')
+    console.log("🚀 ~ file: index.tsx ~ line 34 ~ const{chatList}=useChatList ~ text", text)
+    if(text) getSentiment(text)
   })
 
   console.log("🚀 ~ file: index.tsx ~ line 25 ~ const{chatList}=useChatList ~ chatList", chatList)

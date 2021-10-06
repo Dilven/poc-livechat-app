@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
+import { Chat } from "../models/livechat";
 import { ChatSDK } from "../services/chat";
 
-type Chat = any
 type Data = {
     payload: {
         chat: Chat
-        chat_id: number
+        chat_id: string
     }
 }
-type PickChat = (chat: Chat) => void
+type PickChat = (chat: Chat | null) => void
 export function useChatList(agentData: any, pickChat: PickChat) {
     const [chatList, setChatList] = useState<Chat[]>([]);
 
@@ -23,7 +23,6 @@ export function useChatList(agentData: any, pickChat: PickChat) {
         let isMounted = true;
 
         const handleIncomingChats = (data: Data) => {
-            console.log("🚀 ~ file: useChatList.ts ~ line 18 ~ handleIncomingChats ~ data", data)
             const incomingChat = data.payload.chat;
 
             if (isMounted && !chatList.some(({ id }) => id === incomingChat.id)) {

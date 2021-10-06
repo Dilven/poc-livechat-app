@@ -12,6 +12,12 @@ const getSomething = async () => {
   return data;
 }
 
+const getSentiment = async (text: string) => {
+  const { data } = await axios.get<{ message: string }>(`${baseApiPathname}sentiment?test=${text}`);
+  return data;
+}
+
 export const Api = {
   getSomething,
+  getSentiment
 };
