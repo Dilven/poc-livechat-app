@@ -6,10 +6,10 @@ const instanceApi = axios.create({
 });
 
 const getSentiment = async (text: string) => {
-  const { data } = await instanceApi.post('/sentiment', { text });
+  const { data } = await instanceApi.post("/sentiment", { text });
   return data;
-}
+};
 
 export const nlpClient = {
-  getSentiment
-}
+  getSentiment,
+};

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Chat } from "../models/livechat";
 
 const authorize = async (code: string) => {
   const { data } = await axios.post<any, any>(
@@ -30,7 +31,22 @@ const getChats = async (token: string) => {
   return chats;
 };
 
+const getChat = async (token: string, id: string) => {
+  const { data } = await axios.post(
+    "https://api.livechatinc.com/v3.3/agent/action/get_chat",
+    {
+      chat_id: id,
+    },
+    {
+      headers: { Authorization: token },
+    }
+  );
+  const chat = data as unknown as Chat;
+  return chat;
+};
+
 export const livechatClient = {
   authorize,
   getChats,
+  getChat,
 };

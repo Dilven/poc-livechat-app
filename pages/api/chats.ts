@@ -11,7 +11,7 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const chats = await livechatClient.getChats(
       req.headers.authorization as string
     );
-    res.status(200).json({ chats });
+    res.status(200).json(chats.chats_summary);
   } catch (e) {
     // logger.info(`Bad search request: ${query}`);
     console.log(e);

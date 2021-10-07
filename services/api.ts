@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { authRef } from "../authRef";
+import { Chat } from "../models/livechat";
+import { Sentiment } from "../models/sentiment";
 
 const instanceApi = axios.create({
   baseURL: "/api",
@@ -12,22 +14,22 @@ const getConfig = (params: AxiosRequestConfig = {}) => {
     headers: {
       Authorization: `Bearer ${authRef.token}`,
       "Content-Type": "application/json",
-      ...params?.headers
-    }
+      ...params?.headers,
+    },
   };
 };
 
-const getSomething = async () => {
-  const { data } = await instanceApi.get<{ message: string }>("/hello", getConfig());
+const getChats = async () => {
+  const { data } = await instanceApi.get<Chat[]>("/chats", getConfig());
   return data;
 };
 
 const getReport = async (text: string) => {
-  const { data } = await instanceApi.get<{ message: string }>(`/report?text=${text}`, getConfig());
+  const { data } = await instanceApi.get<Sentiment>(`/report?id=${text}`, getConfig());
   return data;
 };
 
 export const Api = {
-  getSomething,
+  getChats,
   getReport,
 };

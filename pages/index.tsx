@@ -1,21 +1,15 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useMutation, useQueryClient } from "react-query";
-import useAuth from "../hooks/useAuth";
-import { Api } from "../services/api";
+import { useLivechat, useLivechatDispatch } from "../hooks/useLivechat";
 import styles from "../styles/Home.module.css";
-import '@livechat/design-system/dist/design-system.css';
+import "@livechat/design-system/dist/design-system.css";
 import { Button } from "@livechat/design-system";
+import { ReportPanel } from "../components/ReportPanel";
 
 const Home: NextPage = () => {
-  const { authData, singIn } = useAuth();
-  const queryClient = useQueryClient();
-  const { mutate: getReport } = useMutation(Api.getReport, {
-    onSuccess: (data) => {
-      queryClient.setQueryData("raport", data);
-    },
-  });
-
+  console.log('app!')
+  const { authData } = useLivechat();
+  const { singIn } = useLivechatDispatch();
   return (
     <div className={styles.container}>
       <Head>
@@ -29,14 +23,7 @@ const Home: NextPage = () => {
             Sign in
           </Button>
         ) : (
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              getReport("text");
-            }}
-          >
-            Get report
-          </Button>
+          <ReportPanel />
         )}
       </main>
       <footer className={styles.footer}></footer>
