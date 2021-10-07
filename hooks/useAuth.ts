@@ -5,7 +5,7 @@ import { ChatSDK } from "../services/chat";
 
 const options = {
   client_id: process.env.NEXT_PUBLIC_LIVECHAT_APP_CLIENT_ID,
-  redirect_uri: "https://poc-livechat-app.vercel.app/",
+  redirect_uri: process.env.NEXT_PUBLIC_LIVECHAT_APP_REDIRECT_URI,
   prompt: "consent",
 };
 
@@ -14,9 +14,14 @@ const sdk = new AccountsSDK(options);
 const useAuth = () => {
   const [authData, setAuthData] = useState<null | { code: string }>(null);
   const singIn = async () => {
-    const data = await sdk.popup(options).authorize();
-    authRef.token = data.access_token;
-    setAuthData(data);
+    try {
+      const data = await sdk.popup(options).authorize();
+      console.log("🚀 ~ file: useAuth.ts ~ line 19 ~ singIn ~ data", data)
+      authRef.token = data.access_token;
+      setAuthData(data);
+    } catch(e) {
+      console.error(e)
+    }
   };
   return {
     authData,

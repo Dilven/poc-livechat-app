@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const authorize = async (code: string) => {
-  console.log("provided code: ", code);
   const { data } = await axios.post<any, any>(
     "https://accounts.livechat.com/v2/token",
     {
@@ -17,7 +16,6 @@ const authorize = async (code: string) => {
       },
     }
   );
-  console.log("data: ", data);
   return data as { access_token: string };
 };
 

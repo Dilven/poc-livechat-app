@@ -1,12 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useMutation, useQueryClient } from "react-query";
 import useAuth from "../hooks/useAuth";
-import { useChatList } from "../hooks/useChatList";
-import { Chat } from "../models/livechat";
 import { Api } from "../services/api";
 import styles from "../styles/Home.module.css";
+import '@livechat/design-system/dist/design-system.css';
 import { Button } from "@livechat/design-system";
 
 const Home: NextPage = () => {
@@ -31,14 +29,14 @@ const Home: NextPage = () => {
             Sign in
           </Button>
         ) : (
-          <button
+          <Button
             onClick={(e) => {
               e.preventDefault();
               getReport("text");
             }}
           >
-            Get chats
-          </button>
+            Get report
+          </Button>
         )}
       </main>
       <footer className={styles.footer}></footer>

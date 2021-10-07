@@ -1,21 +1,29 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { authRef } from "../authRef";
 
 const instanceApi = axios.create({
-  baseURL: "/api/",
+  baseURL: "/api",
   timeout: 3000,
-  headers: {
-    Authorization: `Bearer ${authRef.token}`,
-  },
 });
 
+const getConfig = (params: AxiosRequestConfig = {}) => {
+  return {
+    ...params,
+    headers: {
+      Authorization: `Bearer ${authRef.token}`,
+      "Content-Type": "application/json",
+      ...params?.headers
+    }
+  };
+};
+
 const getSomething = async () => {
-  const { data } = await instanceApi.get<{ message: string }>("hello");
+  const { data } = await instanceApi.get<{ message: string }>("/hello", getConfig());
   return data;
 };
 
 const getReport = async (text: string) => {
-  const { data } = await axios.get<{ message: string }>(`report?text=${text}`);
+  const { data } = await instanceApi.get<{ message: string }>(`/report?text=${text}`, getConfig());
   return data;
 };
 
