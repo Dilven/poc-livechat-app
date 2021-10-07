@@ -25,7 +25,10 @@ const getChats = async () => {
 };
 
 const getReport = async (text: string) => {
-  const { data } = await instanceApi.get<Sentiment>(`/report?id=${text}`, getConfig());
+  const { data } = await instanceApi.get<Sentiment>(
+    `/report?id=${text}`,
+    getConfig()
+  );
   return data;
 };
 

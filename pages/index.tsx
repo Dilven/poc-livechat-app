@@ -7,7 +7,7 @@ import { Button } from "@livechat/design-system";
 import { ReportPanel } from "../components/ReportPanel";
 
 const Home: NextPage = () => {
-  console.log('app!')
+  console.log("app!");
   const { authData } = useLivechat();
   const { singIn } = useLivechatDispatch();
   return (

@@ -1,8 +1,8 @@
 import { Button, Card, Divider } from "@livechat/design-system";
 import { useMutation, useQueryClient } from "react-query";
-import { Chat as ChatModel } from "../models/livechat";
+import { Chat as ChatModel, UserType } from "../models/livechat";
 import { Api } from "../services/api";
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut } from "react-chartjs-2";
 
 type Props = {
   chat: ChatModel;
@@ -19,13 +19,13 @@ export const Chat = ({ chat }: Props) => {
     labels: Object.keys(report || {}),
     datasets: [
       {
-        label: 'Sentiments',
+        label: "Sentiments",
         data: Object.values(report || {}),
         backgroundColor: [
-          'rgba(255, 206, 86, 1)',
-          'rgba(255, 99, 132, 1)',
-          'rgba(11, 145, 235, 0.2)',
-          '#0dca1d',
+          "rgba(255, 206, 86, 1)",
+          "rgba(255, 99, 132, 1)",
+          "rgba(11, 145, 235, 0.2)",
+          "#0dca1d",
         ],
         borderWidth: 1,
       },
@@ -34,18 +34,26 @@ export const Chat = ({ chat }: Props) => {
   return (
     <Card
       key={chat.id}
-      title="Title goes here"
+      title={
+        chat.users.find((user) => user.type === UserType.agent)?.name ||
+        "Unknown"
+      }
       img="https://via.placeholder.com/100"
     >
       <div>
         <Divider />
         Users:
-        {chat.users.map((user) => (
-          <>
-            <p>{user.id}</p>
-            <p>{user.name}</p>
-          </>
-        ))}
+        <ul>
+          {chat.users
+            .filter((user) => user.type !== UserType.agent)
+            .map((user) => (
+              <li key={user.id}>
+                <p>{user.id}</p>
+                <br />
+                <p>{user.name}</p>
+              </li>
+            ))}
+        </ul>
         <Divider />
         <Button onClick={() => getReport(chat.id)}>Get raport</Button>
       </div>
