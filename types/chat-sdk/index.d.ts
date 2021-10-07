@@ -1,1 +1,1 @@
-declare module '@livechat/chat-sdk'
+declare module "@livechat/chat-sdk";

@@ -1,4 +1,4 @@
-import { DefaultOptions } from 'react-query';
+import { DefaultOptions } from "react-query";
 
 const THIRTY_MINUTES = 1000 * 60 * 30;
 

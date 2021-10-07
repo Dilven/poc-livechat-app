@@ -1,23 +1,25 @@
-import axios from 'axios';
-import { authRef } from '../authRef';
+import axios from "axios";
+import { authRef } from "../authRef";
 
-const baseApiPathname = '/api/';
+const instanceApi = axios.create({
+  baseURL: "/api/",
+  timeout: 3000,
+  headers: {
+    Authorization: `Bearer ${authRef.token}`,
+  },
+});
 
 const getSomething = async () => {
-  const { data } = await axios.get<{ message: string }>(`${baseApiPathname}hello`, {
-    headers: {
-      "Authorization": `Bearer ${authRef.token}`,
-    }
-  });
+  const { data } = await instanceApi.get<{ message: string }>("hello");
   return data;
-}
+};
 
-const getSentiment = async (text: string) => {
-  const { data } = await axios.get<{ message: string }>(`${baseApiPathname}sentiment?test=${text}`);
+const getReport = async (text: string) => {
+  const { data } = await axios.get<{ message: string }>(`report?text=${text}`);
   return data;
-}
+};
 
 export const Api = {
   getSomething,
-  getSentiment
+  getReport,
 };

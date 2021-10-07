@@ -1,3 +1,3 @@
 export const authRef = {
-    token: null
+  token: null,
 };

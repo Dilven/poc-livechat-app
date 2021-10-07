@@ -1,6 +1,5 @@
 import { Loader } from "@livechat/design-system";
 
-
 const Loading = () => {
   return (
     <div>

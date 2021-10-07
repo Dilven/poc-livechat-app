@@ -13,7 +13,6 @@ const getHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
     res.status(200).json({ chats });
   } catch (e) {
-    // logger.info(`Bad search request: ${query}`);
     console.log(e);
     throw Boom.badGateway();
   }

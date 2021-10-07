@@ -1,11 +1,7 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import {
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query'
-import { defaultOptions } from '../config/cache';
-
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { defaultOptions } from "../config/cache";
 
 const queryClient = new QueryClient({ defaultOptions });
 
@@ -14,6 +10,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Component {...pageProps} />
     </QueryClientProvider>
-  )
+  );
 }
-export default MyApp
+export default MyApp;

@@ -6,13 +6,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint:check": "next lint",
+    "lint:fix": "next lint --fix",
+    "format:fix": "prettier --write .",
+    "format:check": "prettier --check .",
+    "static:check": "npm run typing:check && npm run lint:check && npm run format:check",
+    "static:fix": "npm run lint:fix && npm run format:fix",
+    "typing:check": "tsc --noEmit"
   },
   "dependencies": {
     "@hapi/boom": "^9.1.4",
     "@livechat/accounts-sdk": "^2.0.3",
+    "@livechat/agent-app-sdk": "^1.5.2",
     "@livechat/chat-sdk": "^0.1.1",
     "@livechat/design-system": "^0.13.1",
+    "@livechat/lc-sdk-js": "^3.0.2",
     "axios": "^0.22.0",
     "next": "11.1.2",
     "react": "17.0.2",
@@ -23,6 +31,8 @@
     "@types/react": "17.0.27",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "2.4.1",
     "typescript": "4.4.3"
   }
 }
